@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Project specific
+output/
+*.pth
+*.pt
+*.onnx
+*.h5
+*.csv
+database.db
+*.log
+
+# Uploads and static files (keep structure, ignore content)
+static/uploads/*
+!static/uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files (too large for git)
+model/*.onnx
+model/*.h5
+model/*.pth
+model/*.pt
+!model/README.txt
+
+# Checkpoints
+output/checkpoints/*
+!output/checkpoints/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+predictions_*.csv
+
+# Environment variables
+.env
+.env.local
+
