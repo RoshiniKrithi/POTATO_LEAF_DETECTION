@@ -21,5 +21,14 @@ setup(
         "pyyaml>=6.0.0",
         "rich>=13.6.0",
     ],
-)
+). setup(
+    name="potato_leaf_detection",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        "torch>=2.2.0",
+        "torchvision>=0.17.0",
+        "numpy>=1.24.0",
+        "pandas>=2.0.0",
+        "scikit-learn>=1.3.0",
 
