@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}History | Potato Leaf Guard{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">Prediction History</h2>
+        <p class="text-muted mb-0">Every prediction is stored securely for traceability.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <input class="form-control" id="historySearch" placeholder="Search description or prediction">
+        <a class="btn btn-outline-success" href="{{ url_for('download_history') }}">Download CSV</a>
+      </div>
+    </div>
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table align-middle table-hover mb-0" id="historyTable">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Image</th>
+            <th scope="col">Prediction</th>
+            <th scope="col">Confidence</th>
+            <th scope="col">Description</th>
+            <th scope="col">Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in predictions %}
+            <tr>
+              <td>{{ item.id }}</td>
+              <td><img src="/{{ item.image_path }}" alt="Leaf" class="thumb-img rounded"></td>
+              <td>
+                <span class="badge {% if item.prediction == 'Healthy' %}bg-success-subtle text-success{% else %}bg-danger-subtle text-danger{% endif %}">
+                  {{ item.prediction }}
+                </span>
+              </td>
+              <td>{{ "%.2f"|format(item.confidence) }}%</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.timestamp }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="6" class="text-center text-muted py-4">No predictions yet. Upload a leaf image to get started.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  const searchInput = document.getElementById('historySearch');
+  const table = document.getElementById('historyTable');
+  const rows = table.querySelectorAll('tbody tr');
+  searchInput?.addEventListener('input', () => {
+    const term = searchInput.value.toLowerCase();
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(term) ? '' : 'none';
+    });
+  });
+</script>
+{% endblock %}
+

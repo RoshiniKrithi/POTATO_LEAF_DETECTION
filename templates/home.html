@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Analyze Leaf | Potato Leaf Guard{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10 col-xl-8">
+    <div class="upload-card shadow-lg p-4">
+      <div class="d-flex flex-column flex-md-row align-items-start gap-4">
+        <div class="flex-grow-1 w-100">
+          <h2 class="fw-bold mb-1">Upload Potato Leaf</h2>
+          <p class="text-muted mb-4">Preview the image, then click <strong>Analyze Leaf</strong> to run the AI model.</p>
+          {% if model_error %}
+            <div class="alert alert-danger">
+              {{ model_error }}
+            </div>
+          {% endif %}
+          <form id="uploadForm" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label class="form-label">Leaf Image</label>
+              <input class="form-control" type="file" id="leafImage" name="image" accept="image/*" required>
+            </div>
+            <div class="preview-wrapper mb-3" id="previewWrapper">
+              <img id="previewImage" src="" alt="Preview" class="img-fluid rounded d-none">
+              <div class="placeholder-text text-muted" id="previewPlaceholder">Image preview will appear here</div>
+            </div>
+            <div class="d-grid d-md-flex gap-3">
+              <button class="btn btn-success btn-lg px-4" type="submit" id="analyzeBtn">
+                <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true" id="loadingSpinner"></span>
+                Analyze Leaf
+              </button>
+              <a class="btn btn-outline-secondary btn-lg px-4" href="{{ url_for('history') }}">View History</a>
+            </div>
+          </form>
+        </div>
+        <div class="result-panel flex-shrink-0 w-100 w-md-50">
+          <h5 class="text-uppercase text-muted fw-semibold">Prediction</h5>
+          <div id="resultEmpty" class="text-muted">Run an analysis to see results here.</div>
+          <div id="resultCard" class="d-none">
+            <img id="resultImage" class="img-fluid rounded mb-3" alt="Analyzed leaf">
+            <p class="mb-2">Prediction: <span id="resultBadge" class="badge fs-6"></span></p>
+            <p class="mb-2">Confidence: <span id="resultConfidence" class="fw-bold"></span></p>
+            <p id="resultDescription" class="text-muted"></p>
+            <p class="text-muted small mb-0">Saved at <span id="resultTimestamp"></span></p>
+          </div>
+          <div id="resultError" class="alert alert-danger d-none mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,48 @@
+
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">Checkpoint Monitor</h2>
+        <p class="text-muted mb-0">Browse and download model checkpoints saved during training.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button id="refreshBtn" class="btn btn-outline-secondary">Refresh</button>
+        <a class="btn btn-success" href="{{ url_for('home') }}">Back to Home</a>
+      </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table align-middle mb-0" id="checkpointsTable">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size (KB)</th>
+            <th scope="col">Modified</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ckpt in checkpoints %}
+            <tr>
+              <td>{{ ckpt.name }}</td>
+              <td>{{ ckpt.size_kb }}</td>
+              <td>{{ ckpt.mtime }}</td>
+              <td>
+                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('download_checkpoint', filename=ckpt.name) }}">Download</a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="4" class="text-center text-muted py-4">No checkpoints found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='js/monitor.js') }}"></script>
+{% endblock %}
