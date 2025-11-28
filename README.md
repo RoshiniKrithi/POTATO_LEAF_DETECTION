@@ -10,7 +10,7 @@ Production-ready training, evaluation, export, and inference pipeline with a **F
 - Real-time disease detection using ONNX Runtime
 - Prediction history with search and CSV export
 - Responsive, modern UI with Bootstrap
-- Secure session management
+- Secure session management.
 
 ### 🤖 Machine Learning Pipeline
 - Auto-detects dataset at `--data-dir` with support for:
