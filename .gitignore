@@ -74,3 +74,21 @@ predictions_*.csv
 .env
 .env.local
 
+# Dataset images (too large)
+potato_dataset/**/*.JPG
+potato_dataset/**/*.jpg
+
+# Test/documentation files (not essential for project)
+TODAY_PUSH_LIST*.md
+GITHUB_*.md
+PROJECT_FILES_EXPLANATION.md
+test-streak/
+
+# Temporary shim files
+ai_edge_litert/
+
+# IDE workspace files
+*.code-workspace
+
+# PowerShell scripts (optional)
+monitor_checkpoints.ps1
