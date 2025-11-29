@@ -56,6 +56,7 @@ Thumbs.db
 
 # Model files (too large for git)
 model/*.onnx
+!model/potato_disease_model.onnx
 model/*.h5
 model/*.pth
 model/*.pt
